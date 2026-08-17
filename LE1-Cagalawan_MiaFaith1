@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main()
+
+{
+    
+printf("=================================\n");
+printf(" STUDENT PROFILE\n"); 
+printf("=================================\n"); 
+printf("Name:Mia Faith Cagalawan \n");
+printf("Course and section BSIT-1r13\n");
+printf("Year Level: 1st year\n");
+printf(" SOFTWARE DEVELOPER\n");
+return 0;
+
+}
