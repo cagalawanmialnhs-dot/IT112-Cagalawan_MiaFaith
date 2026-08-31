@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main() {
+    char name [] =" Mia Faith Cagalawan";
+    char Section [] ="BSIT - 1R13";
+    
+    float num1 = 11;
+    float num2 = 20;
+    
+    printf ("Student Calculator\n");
+    printf ("Student Name: Mia Faith Cagalawan\n");
+    printf ("Section: BSIT - 1R13\n");
+    printf ("results:\n");
+    
+    printf ("%.0f + %.0f = %.0f\n", num1, num2, num1 + num2);
+    printf ("%.0f - %.0f = %.0f\n", num1, num2, num1 - num2);
+    printf ("%.0f * %.0f = %.0f\n", num1, num2, num1 * num2);
+    printf ("%.0f / %.0f = %.0f\n", num1, num2, num1 / num2);
+    
+    
+    return 0;
+}
