@@ -1,0 +1,119 @@
+#include <stdio.h>
+
+#define CORRECT_PIN 1234
+
+
+void checkBalance(float balance);
+void depositMoney(float *balance);
+void withdrawMoney(float *balance);
+
+int main() {
+    int pin;
+    int authenticated = 0;
+    int choice;
+    float balance = 5000.00;
+
+    printf("================================\n");
+    printf("       ATM SIMULATION SYSTEM\n");
+    printf("================================\n");
+
+    
+    for (int attempts = 1; attempts <= 3; attempts++) {
+        printf("\nEnter your 4-digit PIN: ");
+        scanf("%d", &pin);
+
+        if (pin == CORRECT_PIN) {
+            authenticated = 1;
+            printf("\nPIN accepted! Welcome.\n");
+            break;
+        } else {
+            printf("Incorrect PIN. Attempt %d of 3.\n", attempts);
+        }
+    }
+
+    if (authenticated == 0) {
+        printf("\nAccount locked. Too many attempts.\n");
+        printf("Please try again later.\n");
+        return 0;
+    }
+
+    
+    do {
+        printf("\n========== ATM MENU ==========\n");
+        printf("1. Check Balance\n");
+        printf("2. Deposit Money\n");
+        printf("3. Withdraw Money\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                checkBalance(balance);
+                break;
+
+            case 2:
+                depositMoney(&balance);
+                break;
+
+            case 3:
+                withdrawMoney(&balance);
+                break;
+
+            case 4:
+                printf("\nThank you for using our ATM!\n");
+                printf("Please take care.\n");
+                break;
+
+            default:
+                printf("\nInvalid choice. Please try again.\n");
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
+
+void checkBalance(float balance) {
+    printf("\nCurrent Balance: PHP %.2f\n", balance);
+}
+
+void depositMoney(float *balance) {
+    float amount;
+
+    printf("\nEnter deposit amount: PHP ");
+    scanf("%f", &amount);
+
+    while (amount <= 0) {
+        printf("Invalid amount. Enter a positive amount: PHP ");
+        scanf("%f", &amount);
+    }
+
+    *balance = *balance + amount;
+
+    printf("\nDeposit successful!\n");
+    printf("New Balance: PHP %.2f\n", *balance);
+}
+
+void withdrawMoney(float *balance) {
+    float amount;
+
+    printf("\nEnter withdrawal amount: PHP ");
+    scanf("%f", &amount);
+
+    while (amount <= 0) {
+        printf("Invalid amount. Enter a positive amount: PHP ");
+        scanf("%f", &amount);
+    }
+
+    if (amount <= *balance) {
+        *balance = *balance - amount;
+
+        printf("\nWithdrawal successful!\n");
+        printf("New Balance: PHP %.2f\n", *balance);
+    } else {
+        printf("\nInsufficient balance!\n");
+        printf("Current Balance: PHP %.2f\n", *balance);
+    }
+}
+
