@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+int main()
+{
+    FILE *fp;
+    char note[200];
+    int total, count = 1;
+
+    printf("===== NOTES FILE SYSTEM =====\n");
+
+    fp = fopen("notes.txt", "w");
+
+    if (fp == NULL)
+    {
+        printf("Cannot create file!");
+        return 1;
+    }
+
+    printf("Enter number of notes: ");
+    scanf("%d", &total);
+    getchar();
+
+    while (count <= total)
+    {
+        printf("Write note %d: ", count);
+        fgets(note, 200, stdin);
+        fputs(note, fp);
+
+        count++;
+    }
+
+    fclose(fp);
+
+    printf("\nNotes have been saved!\n");
+
+    fp = fopen("notes.txt", "a");
+
+    if (fp == NULL)
+    {
+        printf("Cannot open file!");
+        return 1;
+    }
+
+    printf("\n===== ADD NEW NOTE =====\n");
+    printf("Enter your new note: ");
+    fgets(note, 200, stdin);
+
+    fputs(note, fp);
+
+    fclose(fp);
+
+    printf("Additional note saved!\n");
+
+    fp = fopen("notes.txt", "r");
+
+    if (fp == NULL)
+    {
+        printf("Cannot read file!");
+        return 1;
+    }
+
+    printf("\n===== ALL SAVED NOTES =====\n");
+
+    count = 1;
+
+    while (fgets(note, 200, fp) != NULL)
+    {
+        printf("Note %d: %s", count, note);
+        count++;
+    }
+
+    fclose(fp);
+
+    printf("\n\nEnd of notes.");
+
+    return 0;
+}
