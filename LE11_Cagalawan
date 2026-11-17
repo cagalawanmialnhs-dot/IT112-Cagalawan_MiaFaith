@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+int main()
+{
+    FILE *fp;
+    int id, answer;
+    char name[100], section[50];
+    char record[200];
+
+    fp = fopen("student_records.txt", "a");
+
+    if (fp == NULL)
+    {
+        printf("Unable to open file.");
+        return 1;
+    }
+
+    printf("STUDENT RECORD SYSTEM\n");
+
+    do
+    {
+        printf("\nStudent ID Number: ");
+        scanf("%d", &id);
+
+        printf("Complete Name: ");
+        scanf(" %[^\n]", name);
+
+        printf("Section: ");
+        scanf(" %[^\n]", section);
+
+        fprintf(fp, "ID Number: %d\n", id);
+        fprintf(fp, "Complete Name: %s\n", name);
+        fprintf(fp, "Section: %s\n\n", section);
+
+        printf("\nStudent record saved!\n");
+
+        printf("\nAdd another student? (1 = Yes, 0 = No): ");
+        scanf("%d", &answer);
+
+    } while (answer == 1);
+
+    fclose(fp);
+
+    fp = fopen("student_records.txt", "r");
+
+    if (fp == NULL)
+    {
+        printf("Unable to read file.");
+        return 1;
+    }
+
+    printf("\n===== SAVED STUDENT RECORDS =====\n");
+
+    while (fgets(record, sizeof(record), fp))
+    {
+        printf("%s", record);
+    }
+
+    fclose(fp);
+
+    printf("\nRecords displayed successfully!\n");
+
+    return 0;
+}
